@@ -94,7 +94,7 @@ export default function CheckoutScreen() {
             </View>
             </View>
 
-              <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}>
+              <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                 <Text className = "text-white text-sm font-bold ">Choose Theater</Text>
                 <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
@@ -107,7 +107,7 @@ export default function CheckoutScreen() {
             </View>
         </View>
         </View>
-        <TouchableOpacity className="flex-row justify-center  mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }}>
+        <TouchableOpacity className="flex-row justify-center  mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("ChooseTicket", {item})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
         </TouchableOpacity>
         </View>
