@@ -45,8 +45,8 @@ export default function MovieDetailScreen() {
     <ScrollView contentContainerStyle={{paddingBottom : 20}} className="flex-1 bg-neutral-900">
         <View className="w-full">
             <SafeAreaView className={"absolute z-20  w-full flex-row justify-between items-center  px-4 "}>
-            <TouchableOpacity style={generalStyles.background} className="rounded-xl p-1 mx-4" onPress={() => navigation.goBack()}>
-                <ChevronLeftIcon size="28" strokeWidth={2.5} color="white" />
+            <TouchableOpacity  className="rounded-xl p-1 " onPress={() => navigation.goBack()}>
+                <ChevronLeftIcon size="28" strokeWidth={2.5} color="#96a723" />
             </TouchableOpacity>
             <TouchableOpacity className="px-4" >
                 <HeartIcon size= "35" color={"white"}></HeartIcon>
@@ -94,20 +94,25 @@ export default function MovieDetailScreen() {
           }
 
         </View>
-        <View className="flex-row justify-center items-center">
-            <View className="flex-col justify-between items-center">
+        <View className="flex-row justify-between ">
+            <View className="flex-col justify-between ">
         <Text className="text-white font-bold text-sm mx-3 " > Release Date :  <Text className="text-neutral-400 font-semibold"> {movie?.release_date} </Text></Text>
         <Text className="text-white font-bold text-sm mx-3 " > Duration :  <Text className="text-neutral-400 font-semibold"> {movie?.runtime} minutes</Text> </Text>
         <Text className="text-white font-bold text-sm mx-3 " > Director : <Text className="text-neutral-400 font-semibold"> {item.director}</Text></Text>
       </View>
-      <View styles={{width : width * 0.2 , height : height * 0.2 , backgroundColor: "white" ,}}>
-      <Text className="text-white font-bold text-sm mx-3 " > Rating : <Text className="text-neutral-400 font-semibold"> {movie?.vote_average} / 10</Text></Text>
+      
+        <View className="items-center justify-center mx-5" style={{borderRadius : 40 , padding : 7, width : 60, height : 60 , borderWidth : 4 , borderColor : "#96a723"}}>
+      <Text className="text-white font-semibold text-lg text-center"> {movie?.vote_average?.toString().substring(0,3) }</Text>
       </View>
         </View>
       <View className="flex-col mt-2">
         <Text className="text-white font-bold text-sm mx-3 " > Overview  </Text>
         <Text className="text-white mx-4 font-semibold tracking-wide my-2 text-sm" style={{ lineHeight: 20 }}>{movie?.overview}</Text>
       </View>
+
+      <TouchableOpacity className="flex-row justify-center items-center mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Checkout" , movie)}>
+        <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
+        </TouchableOpacity>
         
         </View>
 
