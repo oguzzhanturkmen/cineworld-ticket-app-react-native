@@ -7,11 +7,14 @@ import { TouchableOpacity } from 'react-native';
 import { generalStyles } from '../style/style';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
+import { useRoute } from '@react-navigation/native'
 
 var {width , height} = Dimensions.get('window');
 
 export default function CheckoutScreen() {
     const navigation = useNavigation();
+    const route = useRoute();
+    const {movie, item} = route.params;
 
   return (
     <View className = "flex-1 bg-neutral-900 h-full ">
@@ -69,23 +72,23 @@ export default function CheckoutScreen() {
             <View className = "flex-row items-center justify-between -mt-8" style={{  height : height * 0.3 , backgroundColor : "gray", borderRadius : 20}} >
                 
                 <ImageBackground
-                source={{uri : "https://www.napoleon.movie/images/share.jpg"}}
+                source={{uri : "https://image.tmdb.org/t/p/w1280" + movie?.backdrop_path}}
                 style={{ height : height * 0.3 , width : width * 0.963 ,position: 'absolute', left: 0, top: 0 , zIndex:-1}}
                 imageStyle={{ borderRadius: 20}}
                 blurRadius={20}>
                 </ImageBackground>
                 <View className = "flex-row" >
                 <Image
-                 source={{uri : "https://image.tmdb.org/t/p/w1280" + "/jE5o7y9K6pZtWNNMEw3IdpHuncR.jpg"}}
+                 source={{uri : "https://image.tmdb.org/t/p/w1280" + movie?.poster_path}}
                  style={{width : width * 0.4, height: height * 0.25 , borderRadius : 20 , }}
                  className="self-center mt-8 ml-2"
             
             />
                 <View className = "flex-col  mt-8 ml-4" >
-                <Text className = "text-white text-xl font-bold ">Napoleon</Text>
+                <Text className = "text-white text-xl font-bold ">{movie?.title}</Text>
                 <Text className = "text-white text-xs font-bold mt-3 ">Action, Adventure, Drama</Text>
-                <Text className = "text-white text-xs font-bold mt-1">192 min</Text>
-                <Text className = "text-white text-xs font-bold mt-1">Director : Ridley Scott</Text>
+                <Text className = "text-white text-xs font-bold mt-1">{movie?.runtime} mins</Text>
+                <Text className = "text-white text-xs font-bold mt-1">Director :{item?.director}</Text>
                 </View>
                 </View>
             </View>

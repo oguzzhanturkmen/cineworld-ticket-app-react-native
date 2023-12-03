@@ -110,7 +110,7 @@ export default function MovieDetailScreen() {
         <Text className="text-white mx-4 font-semibold tracking-wide my-2 text-sm" style={{ lineHeight: 20 }}>{movie?.overview}</Text>
       </View>
 
-      <TouchableOpacity className="flex-row justify-center items-center mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Checkout" , movie)}>
+      <TouchableOpacity className="flex-row justify-center items-center mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Checkout" , {movie, item})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
         </TouchableOpacity>
         
