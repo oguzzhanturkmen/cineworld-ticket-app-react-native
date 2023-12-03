@@ -1,5 +1,5 @@
 import Carousel from 'react-native-snap-carousel';
-import { Dimensions } from 'react-native';
+import { Dimensions, ImageBackground } from 'react-native';
 import { View, Text, TouchableWithoutFeedback, Platform } from 'react-native'
 import React from 'react'
 
@@ -49,7 +49,7 @@ const MovieCard = ({item, handleClick}) => {
   return (
      <TouchableWithoutFeedback onPress={() => handleClick(item)}>
       <View>
-      <Image
+      <ImageBackground
       source={{uri : "https://image.tmdb.org/t/p/w1280" + item.backdropUrl}}
       style={{width: width * 0.9 , height: height * 0.25}}
       className = "rounded-3xl"

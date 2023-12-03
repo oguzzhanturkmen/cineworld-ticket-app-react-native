@@ -101,8 +101,8 @@ export default function MovieDetailScreen() {
         <Text className="text-white font-bold text-sm mx-3 " > Director : <Text className="text-neutral-400 font-semibold"> {item.director}</Text></Text>
       </View>
       
-        <View className="items-center justify-center mx-5" style={{borderRadius : 40 , padding : 7, width : 60, height : 60 , borderWidth : 4 , borderColor : "#96a723"}}>
-      <Text className="text-white font-semibold text-lg text-center"> {movie?.vote_average?.toString().substring(0,3) }</Text>
+        <View className="items-center justify-center mx-5" style={{borderRadius : 40 ,  width : 60, height : 60 , borderWidth : 4 , borderColor : "#96a723"}}>
+      <Text className="text-white font-semibold text-lg text-center">{movie?.vote_average?.toString().substring(0,3) }</Text>
       </View>
         </View>
       <View className="flex-col mt-2">

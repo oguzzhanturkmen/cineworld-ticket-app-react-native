@@ -94,13 +94,13 @@ export default function CheckoutScreen() {
             </View>
             </View>
 
-              <View className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}}>
+              <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}>
                 <View className = "flex-row items-center  mx-5 justify-between " >
                 <Text className = "text-white text-sm font-bold ">Choose Theater</Text>
                 <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
             </View>
-            </View>
-            <View className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}}>
+            </TouchableOpacity>
+            <View className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                 <Text className = "text-white text-sm font-bold ">Pick Date and Session</Text>
                 <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
