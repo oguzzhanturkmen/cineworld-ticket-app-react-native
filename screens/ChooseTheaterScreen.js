@@ -10,6 +10,7 @@ import { useRoute } from '@react-navigation/native'
 import { ArrowRightIcon } from "react-native-heroicons/outline"
 import { ArrowDownIcon } from "react-native-heroicons/outline"
 import { MagnifyingGlassIcon } from "react-native-heroicons/outline"
+import { TextInput } from 'react-native'
 
 
 
@@ -45,17 +46,20 @@ export default function ChooseTheaterScreen() {
                 <ArrowDownIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
+            <View className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                     <View>
-                <Text className = "text-white text-sm font-bold ">Search Theaters</Text>
+                <TextInput className = "text-white text-sm font-bold "
+                placeholder="Search for theaters"
+                placeholderTextColor="gray"
+                />
                 
                 </View>
                 <MagnifyingGlassIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
                 </View>
-            </TouchableOpacity>
+            </View>
             <Text className = "text-white text-sm font-bold mx-4 mt-4 ">All Theaters</Text>
-            <View className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
+            <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                     <View>
                 <Text className = "text-white text-sm font-bold ">Theater Name</Text>
@@ -63,7 +67,7 @@ export default function ChooseTheaterScreen() {
                 </View>
                 <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
                 </View>
-            </View>
+            </TouchableOpacity>
             </SafeAreaView>
             </View>
             
