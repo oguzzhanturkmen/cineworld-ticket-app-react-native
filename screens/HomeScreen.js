@@ -39,10 +39,10 @@ export default function HomeScreen() {
         <SafeAreaView className = "mb-2 z-10">
          <StatusBar style="light" />
         <View className = "flex-row justify-between items-center mx-4">
-            <Bars3CenterLeftIcon size= "30" strokeWidth = {2} color = "white" />
+            <Bars3CenterLeftIcon size= "30" strokeWidth = {2} color = "#96a723" />
             <Text className = "text-white text-3xl font-bold ">cine <Text style={generalStyles.text} >world </Text></Text>
             <TouchableOpacity >
-                <UserCircleIcon size= "33" strokeWidth = {2} color={"#9A3B3B"}  />
+                <UserCircleIcon size= "33" strokeWidth = {2} color={"#96a723"}  />
             </TouchableOpacity>
         </View>
         </SafeAreaView>

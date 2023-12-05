@@ -30,5 +30,13 @@ export const getMovies = async () => {
         console.log(error);
     }
 }
+export const getTheatersByMovieId = async (movieId) => {
+    try {
+        const response = await axios.get(`${url}/showtimes/movie/${movieId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export const fetchMovieDetails = (movieId) => apiCall(movieDetailsEndpoint(movieId))
