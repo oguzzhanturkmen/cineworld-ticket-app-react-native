@@ -22,6 +22,7 @@ const apiCall = async (endpoint , params) => {
         }
     }
 
+
 export const getMovies = async () => {
     try {
         const response = await axios.get(`${url}/movies/`);
@@ -33,6 +34,15 @@ export const getMovies = async () => {
 export const getTheatersByMovieId = async (movieId) => {
     try {
         const response = await axios.get(`${url}/showtimes/movie/${movieId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getShowtimesByTheaterIdAndMovieId = async (theaterId, movieId) => {
+    try {
+        const response = await axios.get(`${url}/showtimes/theater/${theaterId}/movie/${movieId}`);
         return response.data;
     } catch (error) {
         console.log(error);

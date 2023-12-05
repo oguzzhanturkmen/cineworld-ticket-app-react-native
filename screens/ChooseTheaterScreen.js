@@ -28,7 +28,9 @@ export default function ChooseTheaterScreen() {
     const route = useRoute();
     const {item} = route.params;
     const [theaters, setTheaters] = useState([]);
+    const [allTheaters, setAllTheaters] = useState([]);
     const [isModalVisible, setModalVisible] = useState(false);
+    const [city, setCity] = useState("All");
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -44,9 +46,14 @@ export default function ChooseTheaterScreen() {
     const getTheaters = async (movieId) =>  {
         const data = await getTheatersByMovieId(movieId);
         console.log(data);
+        setAllTheaters(data);
         setTheaters(data);
     }
-
+    const handleCitySelection = (city) => () =>{
+        setCity(city);
+        setTheaters(allTheaters.filter((theater) => theater.location === city));
+        toggleModal();
+    }
 
 
 
@@ -68,7 +75,8 @@ export default function ChooseTheaterScreen() {
                 <View className = "flex-row items-center  mx-5 justify-between " >
                     <View>
                 <Text className = "text-white text-sm font-bold ">Choose City</Text>
-                <Text className = "text-white text-sm  ">All</Text>
+                {city === "All" ? <Text className = "text-white text-sm  ">All</Text> : <Text className = "text-white text-sm  ">{city}</Text>}
+                
                 </View>
                 <ArrowDownIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
                 </View>
@@ -89,7 +97,7 @@ export default function ChooseTheaterScreen() {
             <Text className = "text-white text-sm font-bold mx-4 mt-4 ">All Theaters</Text>
             <ScrollView contentContainerStyle={{paddingBottom : 20}} >
             {theaters.map((theater) => (
-                <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
+                <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseDateAndShowtime", {item , theater , })}  >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                     <View>
                 <Text className = "text-white text-sm font-bold ">{theater.name}</Text>
@@ -108,8 +116,8 @@ export default function ChooseTheaterScreen() {
       <Modal isVisible={isModalVisible} >
         <View style={{ flex: 1 , marginTop : height * 0.35 ,}}>
           <Text className = "text-white text-sm font-bold mx-4 mt-4 text-center">All Cities</Text>
-          {theaters.map((theater) => (
-            <TouchableOpacity className = "flex-row justify-center items-center mb-4 mt-2" style={{height : height * 0.07, backgroundColor : "#393939", borderRadius : 20}} onPress={toggleModal}>
+          {allTheaters.map((theater) => (
+            <TouchableOpacity className = "flex-row justify-center items-center mb-4 mt-2" style={{height : height * 0.07, backgroundColor : "#393939", borderRadius : 20}} onPress={handleCitySelection(theater.location)}>
                 <View className = "flex-row justify-center items-center" >
                     <Text className = "text-white text-xl font-bold mx-2 mx-4">{theater.location}</Text>
                     </View>
