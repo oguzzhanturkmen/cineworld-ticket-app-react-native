@@ -49,7 +49,7 @@ export default function MovieDetailScreen() {
                 <ChevronLeftIcon size="28" strokeWidth={2.5} color="#96a723" />
             </TouchableOpacity>
             <TouchableOpacity className="px-4" >
-                <HeartIcon size= "35" color={"white"}></HeartIcon>
+                <HeartIcon size= "35" color={"#96a723"}></HeartIcon>
             </TouchableOpacity>
             </SafeAreaView>
             <View >

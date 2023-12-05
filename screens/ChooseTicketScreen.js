@@ -2,10 +2,14 @@ import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ChevronLeftIcon, CheckCircleIcon, ArrowRightIcon, FilmIcon, UserCircleIcon, ArrowDownCircleIcon, ArrowUpCircleIcon } from "react-native-heroicons/outline"
+import { ChevronLeftIcon, CheckCircleIcon, TicketIcon, UserCircleIcon, ArrowDownCircleIcon, ArrowUpCircleIcon } from "react-native-heroicons/outline"
 import { TouchableOpacity } from 'react-native';
 import { generalStyles } from '../style/style';
 import { useNavigation } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native'
+import { useState } from 'react';
+import { useEffect } from 'react';
+
 
 
 import { Dimensions } from 'react-native';
@@ -15,6 +19,49 @@ var {width , height} = Dimensions.get('window');
 
 export default function ChooseTicketScreen() {
     const navigation = useNavigation();
+    const route = useRoute();
+    const {item} = route.params;
+    const [adultNumber, setAdultNumber] = useState(0);
+    const [studentNumber, setStudentNumber] = useState(0);
+    const [childNumber, setChildNumber] = useState(0);
+    const [total, setTotal] = useState(0);
+const handleIncrement = (type) => () => {
+    if(type === "adult"){
+        setAdultNumber(adultNumber + 1);
+    }
+    else if(type === "student"){
+        setStudentNumber(studentNumber + 1);
+    }
+    else if(type === "child"){
+        setChildNumber(childNumber + 1);
+    }
+}
+const handleDecrement = (type) => () => {
+    if(type === "adult"){
+        if(adultNumber > 0){
+            setAdultNumber(adultNumber - 1);
+        }
+    }
+    else if(type === "student"){
+        if(studentNumber > 0){
+            setStudentNumber(studentNumber - 1);
+        }
+    }
+    else if(type === "child"){
+        if(childNumber > 0){
+            setChildNumber(childNumber - 1);
+        }
+    }
+}
+    useEffect(() => {
+        const newTotal = adultNumber * 10 + studentNumber * 8 + childNumber * 8;
+        setTotal(newTotal);
+    }, [adultNumber, studentNumber, childNumber]);
+    
+
+    
+
+
   return (
     <View className = "flex-1 bg-neutral-900 h-full ">
 
@@ -24,7 +71,7 @@ export default function ChooseTicketScreen() {
         <TouchableOpacity  className="rounded-xl  " onPress={() => navigation.goBack()}>
                 <ChevronLeftIcon size="28" strokeWidth={2.5} color="#96a723" />
             </TouchableOpacity>
-            <Text className = "text-white text-xl font-bold " style={generalStyles.text} >Choose Theater </Text>
+            <Text className = "text-white text-xl font-bold " style={generalStyles.text} >Choose Ticket </Text>
             <TouchableOpacity >
                 <View  style={{width : 28 }}/>
             </TouchableOpacity>
@@ -63,65 +110,80 @@ export default function ChooseTicketScreen() {
             <Text className = "text-neutral-300 text-xs ">You must choose the movie you want to watch, the theater and the session. After that, you can select a ticket.</Text>
         </View>
         <View className = "flex-col  mt-4 justify-between mx-2" >
-            <View className = "flex-row justify-between items-center mb-4" style={{height : height * 0.12, backgroundColor : "#393939", borderRadius : 20}}>
+            <View className = "flex-row justify-between items-center mb-6" style={{height : height * 0.12, backgroundColor : "#393939", borderRadius : 20}}>
                 <View className = "flex-row justify-start items-center" >
                 <UserCircleIcon size= "60" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                 <Text className = "text-white text-xl font-bold mx-2">Adult  |</Text>
-                <Text className = "text-white text-xl font-bold ">$ 10.00 </Text>
+                <Text className = "text-white text-xl font-bold ">$ 10.00</Text>
                 </View>
                 <View className = "flex-row justify-center items-center" >
-                    <Text className = "text-white text-3xl font-bold mx-2">1</Text>
+                    <Text className = "text-white text-3xl font-bold mx-2">{adultNumber}</Text>
                     <View className = "flex-col justify-center items-center mx-4" >
-                    <TouchableOpacity className="mb-3">
+                    <TouchableOpacity className="mb-3" onPress={handleIncrement("adult")}>
                     <ArrowUpCircleIcon size= "45" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleDecrement("adult")}>
                     <ArrowDownCircleIcon size= "45" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                     </TouchableOpacity>
                     </View>
                     </View>
 
             </View>
-            <View className = "flex-row justify-between items-center mb-4" style={{height : height * 0.12, backgroundColor : "#393939", borderRadius : 20}}>
+            <View className = "flex-row justify-between items-center mb-6" style={{height : height * 0.12, backgroundColor : "#393939", borderRadius : 20}}>
                 <View className = "flex-row justify-start items-center" >
                 <UserCircleIcon size= "60" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                 <Text className = "text-white text-xl font-bold mx-2">Student  |</Text>
-                <Text className = "text-white text-xl font-bold ">$ 8.00 </Text>
+                <Text className = "text-white text-xl font-bold ">$ 8.00</Text>
                 </View>
                 <View className = "flex-row justify-center items-center" >
-                    <Text className = "text-white text-3xl font-bold mx-2">1</Text>
+                    <Text className = "text-white text-3xl font-bold mx-2">{studentNumber}</Text>
                     <View className = "flex-col justify-center items-center mx-4" >
-                    <TouchableOpacity className="mb-3">
+                    <TouchableOpacity className="mb-3" onPress={handleIncrement("student")}>
                     <ArrowUpCircleIcon size= "45" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleDecrement("student")}>
                     <ArrowDownCircleIcon size= "45" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                     </TouchableOpacity>
                     </View>
                     </View>
 
             </View>
-            <View className = "flex-row justify-between items-center mb-4" style={{height : height * 0.12, backgroundColor : "#393939", borderRadius : 20}}>
+            <View className = "flex-row justify-between items-center mb-6" style={{height : height * 0.12, backgroundColor : "#393939", borderRadius : 20}}>
                 <View className = "flex-row justify-start items-center" >
                 <UserCircleIcon size= "60" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                 <Text className = "text-white text-xl font-bold mx-2">Child  |</Text>
                 <Text className = "text-white text-xl font-bold ">$ 8.00 </Text>
                 </View>
                 <View className = "flex-row justify-center items-center" >
-                    <Text className = "text-white text-3xl font-bold mx-2">1</Text>
+                    <Text className = "text-white text-3xl font-bold mx-2">{childNumber}</Text>
                     <View className = "flex-col justify-center items-center mx-4" >
-                    <TouchableOpacity className="mb-3">
+                    <TouchableOpacity className="mb-3" onPress={handleIncrement("child")}>
                     <ArrowUpCircleIcon size= "45" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleDecrement("child")}>
                     <ArrowDownCircleIcon size= "45" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
                     </TouchableOpacity>
                     </View>
                     </View>
+                    </View>
+            <View className = "flex-row justify-between items-center mb-4 mt-2" style={{height : height * 0.07, backgroundColor : "#393939", borderRadius : 20}}>
+                <View className = "flex-row justify-start items-center" >
+                <TicketIcon size= "60" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
+                <Text className = "text-white text-xl font-bold mx-2">Total :</Text>
+                <Text className = "text-white text-xl font-bold "> </Text>
+                </View>
+                <View className = "flex-row justify-center items-center" >
+                    <Text className = "text-white text-xl font-bold mx-2 mx-4">$ {total}</Text>
+                    </View>
 
             </View>
             </View>
+            
+           
 
+            <TouchableOpacity className="flex-row justify-center  mx-4  mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7, marginTop : height * 0.10 }} onPress={() => navigation.navigate("ChooseTicket", {item})}>
+        <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
+        </TouchableOpacity>
             </ScrollView>
             </View>
 
