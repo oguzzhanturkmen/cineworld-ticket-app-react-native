@@ -20,7 +20,7 @@ var {width , height} = Dimensions.get('window');
 export default function ChooseTicketScreen() {
     const navigation = useNavigation();
     const route = useRoute();
-    const {item} = route.params;
+    const {item, movie, theater } = route.params;
     const [adultNumber, setAdultNumber] = useState(0);
     const [studentNumber, setStudentNumber] = useState(0);
     const [childNumber, setChildNumber] = useState(0);
@@ -183,7 +183,7 @@ const handleDecrement = (type) => () => {
             
            
 
-            <TouchableOpacity className="flex-row justify-center  mx-4  mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7, marginTop : height * 0.10 }} onPress={() => navigation.navigate("ChooseTicket", {item})}>
+            <TouchableOpacity className="flex-row justify-center  mx-4  mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7, marginTop : height * 0.10 }} onPress={() => navigation.navigate("Seat", {item, adultNumber, studentNumber, childNumber, total, totalSeats, movie, theater})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
         </TouchableOpacity>
             </ScrollView>

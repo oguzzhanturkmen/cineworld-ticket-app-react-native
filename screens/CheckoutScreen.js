@@ -171,7 +171,7 @@ export default function CheckoutScreen() {
         </View>
         }
         </View>
-        <TouchableOpacity className="flex-row justify-center  mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("ChooseTicket", {item})}>
+        <TouchableOpacity className="flex-row justify-center  mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("ChooseTicket", {item, time, hours, minutes, day, movie, monthName, theater})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
         </TouchableOpacity>
         </View>
