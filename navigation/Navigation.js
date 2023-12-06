@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import MovieDetailScreen from '../screens/MovieDetailScreen';
 import CheckoutScreen from '../screens/CheckoutScreen';
 import ChooseDateAndShowtime from '../screens/ChooseDateAndShowtime';
+import SeatScreen from '../screens/SeatScreen';
 const Stack = createStackNavigator();
 
 
@@ -22,6 +23,7 @@ export default function Navigation() {
       <Stack.Screen name="ChooseTicket" component={ChooseTicketScreen} options={{headerShown: false}} />
       <Stack.Screen name="ChooseTheater" component={ChooseTheaterScreen} options={{headerShown: false}} />
       <Stack.Screen name="ChooseDateAndShowtime" component={ChooseDateAndShowtime} options={{headerShown: false}} />
+      <Stack.Screen name="Seat" component={SeatScreen} options={{headerShown: false}} />
       
     </Stack.Navigator>
   </NavigationContainer>
