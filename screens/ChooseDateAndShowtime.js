@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,12 +20,13 @@ var {width , height} = Dimensions.get('window');
 export default function ChooseDateAndShowtime() {
     const navigation = useNavigation();
     const route = useRoute();
-    const {item, theater, } = route.params;
+    const {item, theater, movie} = route.params;
     const [showtimes, setShowtimes] = useState([]);
     const [days, setDays] = useState([]);
     const [selectedDay, setSelectedDay] = useState(0);
     const [time , setTime] = useState(0);
     const [selectedTime, setSelectedTime] = useState(0);
+    const [selectedShowtime, setSelectedShowtime] = useState(0);
     
 
     useEffect(() => {
@@ -64,7 +65,13 @@ export default function ChooseDateAndShowtime() {
     }
     const handleTimeSelection = (time) => () => {
         setSelectedTime(time);
-        navigation.navigate('ChooseTicketScreen', {item, theater, time});
+        showtimes.forEach((showtime) => {
+            if (showtime.dateTime === time.dateTime  ) {
+                setSelectedShowtime(showtime);
+            }
+        })
+
+        navigation.navigate('Checkout', {item, theater, time , selectedDay , selectedTime , selectedShowtime, movie});
     }
 
 
@@ -82,8 +89,18 @@ export default function ChooseDateAndShowtime() {
                 <View  style={{width : 28 }}/>
             </TouchableOpacity>
             </View>
+            <ScrollView contentContainerStyle={{paddingBottom : 20 }} horizontal={true} >
             {days.map((day) => {
                  const isSelectedDay = day === selectedDay;
+                // get name of the month and name of the day  
+                const dateObj = new Date();
+                dateObj.setDate(day);
+                const month = dateObj.toLocaleString('default', { month: 'long' });
+                const dayName = dateObj.toLocaleString('default', { weekday: 'long' }).split(',')[0];
+
+
+
+                 
             return (
                 <TouchableWithoutFeedback
                 key={day} // Add a unique key for each item
@@ -98,10 +115,46 @@ export default function ChooseDateAndShowtime() {
                     borderWidth: isSelectedDay ? 2 : 0, // Thicker border when selected
                     borderColor: isSelectedDay ? "#96a723" : "", // White border when selected
                 }} className="items-center justify-center">
-                    <Text className = "text-white text-base font-bold ">{day} </Text>
+                    <Text className = "text-white text-base font-bold ">{month} {day} </Text>
+                    <Text className = "text-white text-sm font-bold self-start mx-9">{dayName} </Text>
+                    
                 </View>
             </TouchableWithoutFeedback>
+            
             )})}
+            </ScrollView>
+            <ScrollView contentContainerStyle={{paddingBottom : 20 }} horizontal={true} >
+            {
+                selectedDay !== 0 && time.map((time) => {
+                    const isSelectedTime = time === selectedTime;
+                    const date = new Date(time.dateTime);
+                    const hour = date.getHours();
+                    const minutes = date.getMinutes();
+                    return (
+                        <TouchableWithoutFeedback
+                        key={time} // Add a unique key for each item
+                        onPress={handleTimeSelection(time)}
+                        className = "flex-row items-center justify-between mx-2 mt-4 py-2"
+                    >
+                        <View style={{
+                            width: width * 0.35,
+                            height: height * 0.05,
+                            backgroundColor: "#393939", // Change background color when selected
+                            borderRadius: 10,
+                            borderWidth: isSelectedTime ? 2 : 0, // Thicker border when selected
+                            borderColor: isSelectedTime ? "#96a723" : "", // White border when selected
+                        }} className="items-center justify-center">
+                            <Text className = "text-white text-base font-bold ">{hour < 10 ? "0" + hour : hour}:{minutes < 10 ? minutes + "0" : minutes} </Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                    
+                    )
+                }
+
+                )
+            }
+            </ScrollView>
+
 
             
 
