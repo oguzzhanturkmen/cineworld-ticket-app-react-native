@@ -16,39 +16,29 @@ import { useRoute } from '@react-navigation/native';
 import { getSeatsByShowtimeId } from '../api/api';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
-
+import { getSeatsByScreenId } from '../api/api';
 import { generalStyles } from '../style/style';
 import ScreenCurve from '../components/ScreenCurve';
 
-const generateMockSeats = () => {
-    const initialSeats = [];
-const rows = ['A', 'B', 'C', 'D', 'E' , 'F' , 'G' , 'H' , 'I' , 'J'];
-const seatsPerRow = 10;
-
-rows.forEach(row => {
-    for (let i = 1; i <= seatsPerRow; i++) {
-        initialSeats.push({
-            id: `${row}${i}`,
-            row: row,
-            number: i,
-            status: Math.random() < 0.1 ? 'reserved' : 'available', // 10% chance of being reserved
-        });
-    }
-});
-return initialSeats;
-};
 
 
 const groupSeatsByRow = (seats) => {
     return seats.reduce((acc, seat) => {
-        acc[seat.row] = acc[seat.row] || [];
-        acc[seat.row].push(seat);
+        const row = seat.rowChar;
+        acc[row] = acc[row] || [];
+        acc[row].push({
+            id: seat.id,
+            row: row,
+            number: seat.seatNumber,
+            status: seat.status || 'available' // Set default status to 'available'
+        });
         return acc;
     }, {});
 };
 
-const initialSeats = generateMockSeats();
-const groupedSeats = groupSeatsByRow(initialSeats);
+
+
+
 
 const Seat = ({ seat, onToggle }) => {
     let backgroundColor;
@@ -85,38 +75,61 @@ const {width , height} = Dimensions.get('window')
 
 export default function SeatScreen() {
 
-    const [seats, setSeats] = useState(groupedSeats);
+    const [seats, setSeats] = useState({});
     const [selectedSeatIds, setSelectedSeatIds] = useState([]);
 
     useEffect(() => {
         console.log(selectedSeatIds)    
     }, [selectedSeatIds])
-
     const toggleSeat = (seatId) => {
         const newSeats = {...seats};
-        let seatCount = selectedSeatCount;
         let newSelectedSeatIds = [...selectedSeatIds];
-
+    
         for (const row in newSeats) {
             newSeats[row] = newSeats[row].map(seat => {
                 if (seat.id === seatId) {
-                    if (seat.status === 'available' && seatCount < totalSeats) {
-                        seatCount++;
-                        newSelectedSeatIds.push(seat.id);
-                        return { ...seat, status: 'selected' };
-                    } else if (seat.status === 'selected') {
-                        seatCount--;
-                        newSelectedSeatIds = newSelectedSeatIds.filter(id => id !== seat.id);
-                        return { ...seat, status: 'available' };
+                    if (seat.status !== 'reserved') {
+                        if (seat.status === 'available' && newSelectedSeatIds.length < totalSeats) {
+                            seat.status = 'selected';
+                            newSelectedSeatIds.push(seatId);
+                        } else if (seat.status === 'selected') {
+                            seat.status = 'available';
+                            newSelectedSeatIds = newSelectedSeatIds.filter(id => id !== seatId);
+                        }
                     }
                 }
                 return seat;
             });
         }
-
+    
         setSeats(newSeats);
-        setSelectedSeatCount(seatCount);
         setSelectedSeatIds(newSelectedSeatIds);
+    };
+    const Seat = ({ seat, onToggle }) => {
+        // Determine the background color based on seat status
+        let backgroundColor = 'grey'; // Default for available
+        if (seat.status === 'reserved') {
+            backgroundColor = 'red';
+        } else if (seat.status === 'selected') {
+            backgroundColor = 'green';
+        }
+    
+        // Handle seat press
+        const handlePress = () => {
+            if (seat.status !== 'reserved') {
+                onToggle(seat.id);
+            }
+        };
+    
+        return (
+            <TouchableOpacity
+                style={[styles.seat, { backgroundColor }]}
+                onPress={handlePress}
+                disabled={seat.status === 'reserved'}
+            >
+                <Text style={styles.seatText}>{seat.row}{seat.number}</Text>
+            </TouchableOpacity>
+        );
     };
 
     const navigation = useNavigation();
@@ -133,6 +146,7 @@ export default function SeatScreen() {
     useEffect(() => {
 
         if(time){
+            console.log(time);
             const date = new Date(time.dateTime);
             const hours = date.getHours();
             const minutes = date.getMinutes();
@@ -149,6 +163,26 @@ export default function SeatScreen() {
         
     }
     , [time])
+
+    useEffect(() => {
+        console.log("SeatScreen");
+        console.log(time.id);
+        const screenId =time.screen.id;
+        getSeats(screenId);
+        console.log(seats);
+    }
+    , [])
+
+    const getSeats = async (showtimeId) => {
+        const data = await getSeatsByScreenId(showtimeId);
+        const groupedData = groupSeatsByRow(data);
+        for (const row in groupedData) {
+            groupedData[row].sort((a, b) => a.number - b.number);
+        }
+        setSeats(groupedData);
+
+    }
+
 
   return (
     
@@ -199,20 +233,31 @@ export default function SeatScreen() {
             <View style={styles.container}>
             {/* Render seats */}
             
-            {Object.keys(seats).map(row => (
-                <View key={row} style={styles.row}>
-                    <Text style={styles.rowLabel}>{row}</Text>
-                    {seats[row].map(seat => (
-                        <Seat key={seat.id} seat={seat} onToggle={toggleSeat} />
-                    ))}
-                </View>
-                
+            <View style={styles.container}>
+    {Object.keys(seats).map(row => (
+        <View key={row} style={styles.row}>
+            <Text style={styles.rowLabel}>{row}</Text>
+            {seats[row].map(seat => (
+                <Seat key={seat.id} seat={seat} onToggle={toggleSeat} />
             ))}
+        </View>
+    ))}
+</View>
             
             
            
             
-            <View className="flex-row  justify-center top-2">
+          
+
+        </View>
+        
+            </View>
+            
+        </View>   
+        </View>   
+        
+        </View>
+        <View className="flex-row  justify-center pb-6">
             <View style={{backgroundColor : "gray", width : 20 , height : 20 , borderRadius : 50}}></View>
             <Text className = "text-white text-xs mx-2 -mb-10 ">Available</Text>
             <View style={{backgroundColor : "green", width : 20 , height : 20 , borderRadius : 50}}></View>
@@ -220,13 +265,7 @@ export default function SeatScreen() {
             <View style={{backgroundColor : "red", width : 20 , height : 20 , borderRadius : 50}}></View>
             <Text className = "text-white text-xs mx-2 -mb-10 ">Reserved</Text>
             </View>
-
-        </View>
-            </View>
-        </View>   
-        </View>   
-        </View>
-        <TouchableOpacity className="flex-row justify-center items-end   mx-4 mb-6 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("ChooseTicket", {item, time, hours, minutes, day, movie, monthName, theater})}>
+        <TouchableOpacity className="flex-row justify-center items-end   mx-4 mb-6 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Payment", {item, time, hours, minutes, day, movie, monthName, theater})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
         </TouchableOpacity>
         </View>
