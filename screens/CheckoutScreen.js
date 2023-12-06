@@ -8,13 +8,43 @@ import { generalStyles } from '../style/style';
 import { useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native'
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 var {width , height} = Dimensions.get('window');
 
 export default function CheckoutScreen() {
     const navigation = useNavigation();
     const route = useRoute();
-    const {movie, item} = route.params;
+    const {movie, item, theater ,time  } = route.params;
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [day, setDay] = useState(0);
+    const [monthName, setMonthName] = useState(0);
+    const [showtime, setShowtime] = useState(0);
+
+    useEffect(() => {
+
+        if(time){
+            const date = new Date(time.dateTime);
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+            const day = date.getDate();
+            const monthName = date.toLocaleString('default', { month: 'long' });
+            setHours(hours);
+            setMinutes(minutes);
+            setDay(day);
+            setMonthName(monthName);
+        }
+
+        
+    }
+    , [time])
+
+
+    
+
+
 
   return (
     <View className = "flex-1 bg-neutral-900 h-full ">
@@ -93,19 +123,53 @@ export default function CheckoutScreen() {
                 </View>
             </View>
             </View>
-
-              <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item})}  >
+            {
+                theater ?
+                <View className = "flex-col  mx-2 mt-4 justify-between" >
+            <View className = "flex-row items-center shadow-lg  shadow-neutral-900" style={{backgroundColor : "#393939", borderRadius : 20,   height : height * 0.06 , zIndex : 2}} >
                 <View className = "flex-row items-center  mx-5 justify-between " >
-                <Text className = "text-white text-sm font-bold ">Choose Theater</Text>
-                <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
+                <CheckCircleIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
+            <Text className = "text-white text-sm font-bold mx-2">Choose Theater</Text>
             </View>
-            </TouchableOpacity>
+            </View>
+            <View className = "flex-col items-start  -mt-8" style={{  height : height * 0.1 , backgroundColor : "#393639", borderRadius : 20}} >
+                <Text className = "text-white text-xl font-bold ml-4 mt-10">{theater?.name}</Text>
+                <Text className = "text-white text-xs font-bold  ml-4">{theater?.location}</Text>
+            </View>
+            </View> :
+            <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseTheater", {item, movie})}  >
+            <View className = "flex-row items-center  mx-5 justify-between " >
+            <Text className = "text-white text-sm font-bold ">Choose Theater</Text>
+            <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
+        </View>
+        </TouchableOpacity>
+
+
+            }
+            {
+                time ? 
+                 (
+                <View className = "flex-col  mx-2 mt-4 justify-between" >
+            <View className = "flex-row items-center shadow-lg  shadow-neutral-900" style={{backgroundColor : "#393939", borderRadius : 20,   height : height * 0.06 , zIndex : 2}} >
+                <View className = "flex-row items-center  mx-5 justify-between " >
+                <CheckCircleIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
+            <Text className = "text-white text-sm font-bold mx-2">Choose Session</Text>
+            </View>
+            </View>
+            <View className = "flex-col items-start  -mt-8" style={{  height : height * 0.1 , backgroundColor : "#393639", borderRadius : 20}} >
+                <Text className = "text-white text-xl font-bold ml-4 mt-10">{day} {monthName}</Text>
+                <Text className = "text-white text-xs font-bold  ml-4">{hours < 10 ? "0" + hours : hours} : {minutes < 10 ? minutes + "0" : minutes}</Text>
+            </View>
+            </View> ):
+
+              
             <View className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.07 , backgroundColor : "#393939", borderRadius : 20}} >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                 <Text className = "text-white text-sm font-bold ">Pick Date and Session</Text>
                 <ArrowRightIcon size= "30" strokeWidth = {2} color={"#96a723"}  />
-            </View>
+            </View> 
         </View>
+        }
         </View>
         <TouchableOpacity className="flex-row justify-center  mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("ChooseTicket", {item})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>

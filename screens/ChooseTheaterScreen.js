@@ -26,7 +26,7 @@ const {width , height} = Dimensions.get('window')
 export default function ChooseTheaterScreen() {
     const navigation = useNavigation();
     const route = useRoute();
-    const {item} = route.params;
+    const {item, movie} = route.params;
     const [theaters, setTheaters] = useState([]);
     const [allTheaters, setAllTheaters] = useState([]);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -97,7 +97,7 @@ export default function ChooseTheaterScreen() {
             <Text className = "text-white text-sm font-bold mx-4 mt-4 ">All Theaters</Text>
             <ScrollView contentContainerStyle={{paddingBottom : 20}} >
             {theaters.map((theater) => (
-                <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseDateAndShowtime", {item , theater , })}  >
+                <TouchableOpacity className = "flex-col  mx-2 mt-4 justify-center" style={{  height : height * 0.09 , backgroundColor : "#393939", borderRadius : 20}} onPress={() => navigation.navigate("ChooseDateAndShowtime", {item , theater ,movie })}  >
                 <View className = "flex-row items-center  mx-5 justify-between " >
                     <View>
                 <Text className = "text-white text-sm font-bold ">{theater.name}</Text>

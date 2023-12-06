@@ -25,6 +25,7 @@ export default function ChooseTicketScreen() {
     const [studentNumber, setStudentNumber] = useState(0);
     const [childNumber, setChildNumber] = useState(0);
     const [total, setTotal] = useState(0);
+    const [totalSeats, setTotalSeats] = useState(0);
 const handleIncrement = (type) => () => {
     if(type === "adult"){
         setAdultNumber(adultNumber + 1);
@@ -56,6 +57,7 @@ const handleDecrement = (type) => () => {
     useEffect(() => {
         const newTotal = adultNumber * 10 + studentNumber * 8 + childNumber * 8;
         setTotal(newTotal);
+        setTotalSeats(adultNumber + studentNumber + childNumber);
     }, [adultNumber, studentNumber, childNumber]);
     
 
@@ -169,7 +171,7 @@ const handleDecrement = (type) => () => {
             <View className = "flex-row justify-between items-center mb-4 mt-2" style={{height : height * 0.07, backgroundColor : "#393939", borderRadius : 20}}>
                 <View className = "flex-row justify-start items-center" >
                 <TicketIcon size= "60" strokeWidth = {2} color={"#96a723"} style={{marginLeft : 15}}  />
-                <Text className = "text-white text-xl font-bold mx-2">Total :</Text>
+                <Text className = "text-white text-xl font-bold mx-2">Total : {totalSeats} Seats</Text>
                 <Text className = "text-white text-xl font-bold "> </Text>
                 </View>
                 <View className = "flex-row justify-center items-center" >
