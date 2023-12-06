@@ -48,5 +48,13 @@ export const getShowtimesByTheaterIdAndMovieId = async (theaterId, movieId) => {
         console.log(error);
     }
 }
+export const getSeatsByScreenId = async (screenId) => {
+    try {
+        const response = await axios.get(`${url}/seats/screen/${screenId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 export const fetchMovieDetails = (movieId) => apiCall(movieDetailsEndpoint(movieId))
