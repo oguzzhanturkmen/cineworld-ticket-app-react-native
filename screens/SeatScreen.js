@@ -182,6 +182,7 @@ export default function SeatScreen() {
         setSeats(groupedData);
 
     }
+    
 
 
   return (
@@ -219,6 +220,7 @@ export default function SeatScreen() {
             <Text className = "text-white text-lg font-bold ">{theater.name}</Text>
             <Text className = "text-white text-lg font-bold ">{day} {monthName} {year}</Text>
             <Text className = "text-white text-lg font-bold ">{hours < 10 ? "0" + hours : hours}:{minutes <10 ? minutes + "0" : minutes}</Text>
+           
             </View>
             
             

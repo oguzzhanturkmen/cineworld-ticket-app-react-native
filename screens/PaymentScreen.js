@@ -1,10 +1,57 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
+import CreditCard from '../components/CreditCard'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { StatusBar } from 'expo-status-bar'
+import { TouchableOpacity } from 'react-native'
+import { ChevronLeftIcon } from "react-native-heroicons/outline"
+import { generalStyles } from '../style/style'
+import { useNavigation } from '@react-navigation/native'
+import { Dimensions } from 'react-native'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useRoute } from '@react-navigation/native'
+
+
+
+const {width , height} = Dimensions.get('window')
+
+
 
 export default function PaymentScreen() {
+  const navigation = useNavigation();
+    
+    const route = useRoute();
+    const {item} = route.params;
+
+
+
+
   return (
-    <View>
-      <Text>PaymentScreen</Text>
+    
+     <View className = "flex-1 bg-neutral-900 h-full ">
+
+<SafeAreaView className = " z-10">
+ <StatusBar style="light" />
+<View className = "flex-row justify-between items-center mx-1">
+<TouchableOpacity  className="rounded-xl  " onPress={() => navigation.goBack()}>
+        <ChevronLeftIcon size="28" strokeWidth={2.5} color="#96a723" />
+    </TouchableOpacity>
+    <Text className = "text-white text-xl font-bold " style={generalStyles.text} >Payment</Text>
+    <TouchableOpacity >
+        <View  style={{width : 28 }}/>
+    </TouchableOpacity>
     </View>
+    </SafeAreaView>
+    <ScrollView contentContainerStyle={{paddingBottom : 20}} className="flex-1 bg-neutral-900">
+    <View className="flex-1">
+    <CreditCard />
+    <TouchableOpacity className="flex-row justify-center items-center mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Checkout" , {movie, item})}>
+        <Text className="text-neutral-50 font-bold text-center text-base " >Finish Buying</Text>
+        </TouchableOpacity>
+    </View>
+  </ScrollView>
+    </View>
+   
   )
 }
