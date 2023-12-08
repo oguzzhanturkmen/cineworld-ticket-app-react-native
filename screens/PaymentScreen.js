@@ -11,7 +11,7 @@ import { Dimensions } from 'react-native'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRoute } from '@react-navigation/native'
-import { postPaymentData} from '../api/api'
+import { postPaymentData , saveBooking} from '../api/api'
 
 
 
@@ -19,16 +19,36 @@ const {width , height} = Dimensions.get('window')
 
 
 
+
 export default function PaymentScreen() {
   const navigation = useNavigation();
     
     const route = useRoute();
-    const {item} = route.params;
+    const {item, theater, movie, time,  adultNumber, studentNumber, childNumber, total, totalSeats, selectedSeatIds} = route.params;
     const [cardInfo, setCardInfo] = useState({  });
     const [userInfo, setUserInfo] = useState({  });
     const [paymentResponse, setPaymentResponse] = useState({  });
 
-    
+    useEffect
+    (() => {
+
+        console.log("PaymentScreen");
+        console.log(item.id);
+        console.log(theater.id);
+        console.log(movie.id);
+        console.log(time.showtimeId);
+        console.log(adultNumber);
+        console.log(studentNumber);
+        console.log(childNumber);
+        console.log(total);
+        console.log(totalSeats);
+        console.log(selectedSeatIds);
+        
+
+
+
+    }
+    , [])
 
     const handleCardInfo = (cardInfo) => {
         setCardInfo(cardInfo);
@@ -37,7 +57,7 @@ export default function PaymentScreen() {
         setUserInfo(userInfo);
     }
 
-    const handleFinishBuying = () => {
+    const handleFinishBuying = async () => {
       postBody ={
         "paymentDetail": {
             "cardNumber": cardInfo.number,
@@ -51,17 +71,41 @@ export default function PaymentScreen() {
             "phoneNumber": userInfo.phone
         }
     }
-
-    postPaymentData(postBody)
-    .then(response => {
-        console.log("Response:", response);
-        setPaymentResponse(response);
-    })
-    .catch(error => {
-        console.error("Error:", error);
-    });
-};
     
+    
+
+    try {
+      const paymentResponse = await postPaymentData(postBody);
+
+      console.log("Payment Response:", paymentResponse);
+
+      const bookingBody = {
+          "totalPrice": total,
+          "userId": paymentResponse.userId,
+          "paymentDetailId": paymentResponse.paymentDetailId,
+          "showTimeId": time.showtimeId,
+          "seats": selectedSeatIds.map(seatId => ({ "seatId": seatId }))
+      };
+
+      const bookingResponse = await saveBooking(bookingBody);
+
+      console.log("Booking Response:", bookingResponse);
+
+      // Navigate after successful booking
+      navigation.navigate('Home', { /* your navigation parameters */ });
+
+  } catch (error) {
+      console.error("Error:", error);
+  }
+
+    navigation.navigate('Home', {item, theater, time , adultNumber , studentNumber , childNumber , total , totalSeats , selectedSeatIds , movie});
+    
+};
+    useEffect(() => {
+      
+        
+    }
+    , [paymentResponse])
 
 
 
