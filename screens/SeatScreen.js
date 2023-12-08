@@ -267,7 +267,7 @@ export default function SeatScreen() {
             <View style={{backgroundColor : "red", width : 20 , height : 20 , borderRadius : 50}}></View>
             <Text className = "text-white text-xs mx-2 -mb-10 ">Reserved</Text>
             </View>
-        <TouchableOpacity className="flex-row justify-center items-end   mx-4 mb-6 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Payment", {item, time, hours, minutes, day, movie, monthName, theater})}>
+        <TouchableOpacity className="flex-row justify-center items-end   mx-4 mb-6 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Payment", {item, time, hours, minutes, day, movie, monthName, theater,  theater,    adultNumber, studentNumber, childNumber, total, totalSeats, selectedSeatIds})}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Buy Ticket</Text>
         </TouchableOpacity>
         </View>

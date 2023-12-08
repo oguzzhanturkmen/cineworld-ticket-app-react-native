@@ -32,6 +32,18 @@ const apiCall = async (endpoint , params) => {
             return { error: error.message || "An error occurred" };
         }
     };
+
+    export const saveBooking = async (data) => {
+        try {
+            const response = await axios.post(`${url}/bookings/`, data);
+            
+            
+        } catch (error) {
+            console.error("Error occurred in saveBooking:", error);
+
+            return { error: error.message || "An error occurred" };
+        }
+    };
     
 
 
