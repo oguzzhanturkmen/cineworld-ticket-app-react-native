@@ -11,6 +11,7 @@ import { Dimensions } from 'react-native'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRoute } from '@react-navigation/native'
+import { postPaymentData} from '../api/api'
 
 
 
@@ -23,6 +24,48 @@ export default function PaymentScreen() {
     
     const route = useRoute();
     const {item} = route.params;
+    const [cardInfo, setCardInfo] = useState({  });
+    const [userInfo, setUserInfo] = useState({  });
+    const [paymentResponse, setPaymentResponse] = useState({  });
+
+    
+
+    const handleCardInfo = (cardInfo) => {
+        setCardInfo(cardInfo);
+    }
+    const handleUserInfo = (userInfo) => {
+        setUserInfo(userInfo);
+    }
+
+    const handleFinishBuying = () => {
+      postBody ={
+        "paymentDetail": {
+            "cardNumber": cardInfo.number,
+            "cardHolderName": cardInfo.name,
+            "expiryDate": "12/25",
+            "cvv": cardInfo.cvv
+        },
+        "user": {
+            "fullName": userInfo.name,
+            "email": userInfo.email,
+            "phoneNumber": userInfo.phone
+        }
+    }
+
+    postPaymentData(postBody)
+    .then(response => {
+        console.log("Response:", response);
+        setPaymentResponse(response);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+};
+    
+
+
+
+
 
 
 
@@ -45,8 +88,8 @@ export default function PaymentScreen() {
     </SafeAreaView>
     <ScrollView contentContainerStyle={{paddingBottom : 20}} className="flex-1 bg-neutral-900">
     <View className="flex-1">
-    <CreditCard />
-    <TouchableOpacity className="flex-row justify-center items-center mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={() => navigation.navigate("Checkout" , {movie, item})}>
+    <CreditCard handleCardInfo={handleCardInfo} handleUserInfo={handleUserInfo}/>
+    <TouchableOpacity className="flex-row justify-center items-center mx-4 mt-4 mb-2 p-3" style={{backgroundColor :  '#96a723', borderRadius : 30 , padding : 7 }} onPress={handleFinishBuying}>
         <Text className="text-neutral-50 font-bold text-center text-base " >Finish Buying</Text>
         </TouchableOpacity>
     </View>

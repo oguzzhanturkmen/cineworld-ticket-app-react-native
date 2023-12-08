@@ -14,22 +14,25 @@ import { useEffect } from 'react';
 
 const {width , height} = Dimensions.get('window')
 
-const CreditCard = () => {
+const CreditCard = ({handleCardInfo, handleUserInfo}) => {
   const [cardInfo, setCardInfo] = useState({ number: '', name: '', expiry: '', cvv: '' });
   const [userInfo, setUserInfo] = useState({ name: '', email: '', phone: '' });
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    console.log(cardInfo);
-    console.log(userInfo);
+    handleCardInfo(cardInfo);
+    handleUserInfo(userInfo);
     }, [cardInfo, userInfo]);
 
   // Update card information as user types
   const handleInputChange = (field, value) => {
     setCardInfo({ ...cardInfo, [field]: value });
+    
+
   };
   const handleInputUserChange = (field, value) => {
     setUserInfo({ ...userInfo, [field]: value });
+    
   }
 
   return (
