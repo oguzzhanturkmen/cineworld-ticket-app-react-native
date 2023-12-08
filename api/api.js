@@ -22,6 +22,19 @@ const apiCall = async (endpoint , params) => {
         }
     }
 
+    export const postPaymentData = async (data) => {
+        try {
+            const response = await axios.post(`${url}/payment-details/`, data);
+            return response.data;
+        } catch (error) {
+            console.error("Error occurred in postPaymentData:", error);
+            
+            return { error: error.message || "An error occurred" };
+        }
+    };
+    
+
+
 
 export const getMovies = async () => {
     try {
