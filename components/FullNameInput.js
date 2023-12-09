@@ -10,7 +10,7 @@ export default function FullNameInput({handleInputUserChange }) {
 
     const handleNameChange = (text) => {
         
-        handleInputUserChange('name', text); // Update parent state or perform other actions
+        handleInputUserChange('name', text); 
     };
 
 

@@ -82,4 +82,16 @@ export const getSeatsByScreenId = async (screenId) => {
     }
 }
 
+export const getSeatInfoByIds = async (seatIds) => {
+    const queryString = seatIds.map(id => `ids=${id}`).join('&');
+
+    try {
+        const response = await axios.get(`${url}/seats/ids?${queryString}`);
+       
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
 export const fetchMovieDetails = (movieId) => apiCall(movieDetailsEndpoint(movieId))

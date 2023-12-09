@@ -98,7 +98,7 @@ export default function PaymentScreen() {
       console.error("Error:", error);
   }
 
-    navigation.navigate('Home', {item, theater, time , adultNumber , studentNumber , childNumber , total , totalSeats , selectedSeatIds , movie});
+    navigation.navigate('Success', {item, theater, time , adultNumber , studentNumber , childNumber , total , totalSeats , selectedSeatIds , movie , userInfo});
     
 };
     useEffect(() => {
