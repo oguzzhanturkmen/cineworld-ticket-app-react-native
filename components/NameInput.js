@@ -23,7 +23,7 @@ export default function NameInput({handleInputChange }) {
                 <TextInput className = "text-white text-sm font-bold "
                 placeholder={"Card Holder Name"}
                 placeholderTextColor="gray"
-                style={{width : width}}
+                style={{width : width , height : height * 0.06}}
                 maxLength={20}
                 onChangeText={handleNameChange}
                 />

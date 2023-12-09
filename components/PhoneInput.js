@@ -10,7 +10,7 @@ export default function PhoneInput({handleInputUserChange }) {
 
     const handleNameChange = (text) => {
         
-        handleInputUserChange('name', text); // Update parent state or perform other actions
+        handleInputUserChange('phone', text); // Update parent state or perform other actions
     };
 
 
@@ -23,7 +23,7 @@ export default function PhoneInput({handleInputUserChange }) {
                 <TextInput className = "text-white text-sm font-bold "
                 placeholder={"Phone Number"}
                 placeholderTextColor="gray"
-                style={{width : width}}
+                style={{width : width , height : height * 0.06}}
                 maxLength={10}
                 onChangeText={handleNameChange}
                 />

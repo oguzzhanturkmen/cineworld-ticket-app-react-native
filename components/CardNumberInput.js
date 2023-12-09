@@ -21,7 +21,7 @@ const CardNumberInput = ({ handleInputChange }) => {
         <View style={{ height: height * 0.06, width: width * 0.95, backgroundColor: "#393939", borderRadius: 20, marginTop: 16, marginHorizontal: 8, justifyContent: 'center' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 20 }}>
                 <TextInput
-                    style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}
+                    style={{ color: 'white', fontSize: 14, fontWeight: 'bold',  height : height * 0.06 }}
                     placeholder="Card Number"
                     onChangeText={handleCardNumberChange}
                     value={cardNumber} 

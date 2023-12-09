@@ -10,6 +10,7 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 import ChooseDateAndShowtime from '../screens/ChooseDateAndShowtime';
 import SeatScreen from '../screens/SeatScreen';
 import PaymentScreen from '../screens/PaymentScreen';
+import SuccessScreen from '../screens/SuccessScreen';
 const Stack = createStackNavigator();
 
 
@@ -26,6 +27,7 @@ export default function Navigation() {
       <Stack.Screen name="ChooseDateAndShowtime" component={ChooseDateAndShowtime} options={{headerShown: false}} />
       <Stack.Screen name="Seat" component={SeatScreen} options={{headerShown: false}} />
       <Stack.Screen name="Payment" component={PaymentScreen} options={{headerShown: false}} />
+      <Stack.Screen name="Success" component={SuccessScreen} options={{headerShown: false}} />
       
     </Stack.Navigator>
   </NavigationContainer>
