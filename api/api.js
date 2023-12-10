@@ -94,4 +94,13 @@ export const getSeatInfoByIds = async (seatIds) => {
     }
 }
 
+export const getSeatReservationInfoByShowtimeId = async (showtimeId) => {
+    try {
+        const response = await axios.get(`${url}/seat-reservations/showtime/${showtimeId}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const fetchMovieDetails = (movieId) => apiCall(movieDetailsEndpoint(movieId))

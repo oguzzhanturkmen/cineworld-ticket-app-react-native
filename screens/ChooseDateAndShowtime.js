@@ -44,6 +44,7 @@ export default function ChooseDateAndShowtime() {
         setShowtimes(data);
         const days = [];
         data.forEach((showtime) => {
+            
             const date = new Date(showtime.dateTime);
             const day = date.getDate();
             if (!days.includes(day)) {
@@ -52,7 +53,7 @@ export default function ChooseDateAndShowtime() {
         }
         )
         setDays(days);
-        console.log(days);
+        
 
     }
     const handleDaySelection = (day) => () => {
@@ -64,6 +65,8 @@ export default function ChooseDateAndShowtime() {
         setTime(times);
     }
     const handleTimeSelection = (time) => () => {
+        console.log("**********************************************************************************************");
+        console.log(time.showtimeId);
         setSelectedTime(time);
         showtimes.forEach((showtime) => {
             if (showtime.dateTime === time.dateTime  ) {
