@@ -19,56 +19,7 @@ import { StyleSheet } from 'react-native';
 import { getSeatsByScreenId } from '../api/api';
 import { generalStyles } from '../style/style';
 import ScreenCurve from '../components/ScreenCurve';
-
-
-
-const groupSeatsByRow = (seats) => {
-    return seats.reduce((acc, seat) => {
-        const row = seat.rowChar;
-        acc[row] = acc[row] || [];
-        acc[row].push({
-            id: seat.id,
-            row: row,
-            number: seat.seatNumber,
-            status: seat.status || 'available' // Set default status to 'available'
-        });
-        return acc;
-    }, {});
-};
-
-
-
-
-
-const Seat = ({ seat, onToggle }) => {
-    let backgroundColor;
-    let onPress;
-
-    switch(seat.status) {
-        case 'selected':
-            backgroundColor = 'green';
-            onPress = () => onToggle(seat.id);
-            break;
-        case 'reserved':
-            backgroundColor = 'red';
-            onPress = null; // Disable onPress for reserved seats
-            break;
-        default:
-            backgroundColor = 'grey';
-            onPress = () => onToggle(seat.id);
-    }
-
-    return (
-        <TouchableOpacity
-            style={[styles.seat, { backgroundColor }]}
-            onPress={onPress}
-            disabled={seat.status === 'reserved'} // Disable touch for reserved seats
-        >
-            <Text style={styles.seatText}>{seat.row}{seat.number}</Text>
-        </TouchableOpacity>
-    );
-};
-
+import { getSeatReservationInfoByShowtimeId } from '../api/api';
 
 
 const {width , height} = Dimensions.get('window')
@@ -77,10 +28,17 @@ export default function SeatScreen() {
 
     const [seats, setSeats] = useState({});
     const [selectedSeatIds, setSelectedSeatIds] = useState([]);
+    const navigation = useNavigation();
+    const route = useRoute();
+    const {item, theater, movie, time,  adultNumber, studentNumber, childNumber, total, totalSeats} = route.params;
+    const [selectedSeatCount, setSelectedSeatCount] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [day, setDay] = useState(0);
+    const [monthName, setMonthName] = useState(0);
+    const [year, setYear] = useState(0);
 
-    useEffect(() => {
-        console.log(selectedSeatIds)    
-    }, [selectedSeatIds])
+
     const toggleSeat = (seatId) => {
         const newSeats = {...seats};
         let newSelectedSeatIds = [...selectedSeatIds];
@@ -105,42 +63,8 @@ export default function SeatScreen() {
         setSeats(newSeats);
         setSelectedSeatIds(newSelectedSeatIds);
     };
-    const Seat = ({ seat, onToggle }) => {
-        // Determine the background color based on seat status
-        let backgroundColor = 'grey'; // Default for available
-        if (seat.status === 'reserved') {
-            backgroundColor = 'red';
-        } else if (seat.status === 'selected') {
-            backgroundColor = 'green';
-        }
-    
-        // Handle seat press
-        const handlePress = () => {
-            if (seat.status !== 'reserved') {
-                onToggle(seat.id);
-            }
-        };
-    
-        return (
-            <TouchableOpacity
-                style={[styles.seat, { backgroundColor }]}
-                onPress={handlePress}
-                disabled={seat.status === 'reserved'}
-            >
-                <Text style={styles.seatText}>{seat.row}{seat.number}</Text>
-            </TouchableOpacity>
-        );
-    };
-
-    const navigation = useNavigation();
-    const route = useRoute();
-    const {item, theater, movie, time,  adultNumber, studentNumber, childNumber, total, totalSeats} = route.params;
-    const [selectedSeatCount, setSelectedSeatCount] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [day, setDay] = useState(0);
-    const [monthName, setMonthName] = useState(0);
-    const [year, setYear] = useState(0);
+   
+  
 
 
     useEffect(() => {
@@ -165,25 +89,32 @@ export default function SeatScreen() {
     , [time])
 
     useEffect(() => {
-        console.log("SeatScreen");
-        console.log(time.id);
-        const screenId =time.screen.id;
-        getSeats(screenId);
-        console.log(seats);
+        const screenId = time.screen.id;
+    const showtimeId = time.showtimeId;
+    console.log(showtimeId);
+    getSeats(screenId, showtimeId);
+    // ...
     }
     , [])
 
-    const getSeats = async (showtimeId) => {
-        const data = await getSeatsByScreenId(showtimeId);
-        const groupedData = groupSeatsByRow(data);
-        for (const row in groupedData) {
-            groupedData[row].sort((a, b) => a.number - b.number);
+    const getSeats = async (screenId, showtimeId) => {
+        try {
+            const seatData = await getSeatsByScreenId(screenId);
+            const reservationData = await getSeatReservationInfoByShowtimeId(showtimeId);
+            if (seatData && reservationData) {
+                const groupedData = groupSeatsByRow(seatData, reservationData);
+                for (const row in groupedData) {
+                    groupedData[row].sort((a, b) => a.number - b.number);
+                }
+                setSeats(groupedData);
+            } else {
+                console.error('API returned null or undefined for seats or reservations');
+            }
+        } catch (error) {
+            console.error('Error fetching seat data:', error);
         }
-        setSeats(groupedData);
-
-    }
+    };
     
-
 
   return (
     
@@ -236,9 +167,10 @@ export default function SeatScreen() {
             {/* Render seats */}
             
             <View style={styles.container}>
-    {Object.keys(seats).map(row => (
+    {Object.keys(seats).sort().map(row => (
+        
         <View key={row} style={styles.row}>
-            <Text style={styles.rowLabel}>{row}</Text>
+            <Text className="text-neutral-300 text-xs ">{row}</Text>
             {seats[row].map(seat => (
                 <Seat key={seat.id} seat={seat} onToggle={toggleSeat} />
             ))}
@@ -291,6 +223,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         justifyContent : "center",
         marginBottom: 40,
+        
     },
     seat: {
         width: 25,
@@ -304,3 +237,52 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 });
+
+
+const Seat = ({ seat, onToggle }) => {
+    let backgroundColor;
+    let onPress;
+
+    switch(seat.status) {
+        case 'selected':
+            backgroundColor = 'green';
+            onPress = () => onToggle(seat.id);
+            break;
+        case 'reserved':
+            backgroundColor = 'red';
+            onPress = null; // Disable onPress for reserved seats
+            break;
+        default:
+            backgroundColor = 'grey';
+            onPress = () => onToggle(seat.id);
+    }
+
+    return (
+        <TouchableOpacity
+            style={[styles.seat, { backgroundColor }]}
+            onPress={onPress}
+            disabled={seat.status === 'reserved'} // Disable touch for reserved seats
+        >
+            <Text style={styles.seatText}>{seat.row}{seat.number}</Text>
+        </TouchableOpacity>
+    );
+};
+
+
+const groupSeatsByRow = (seats, reservations) => {
+    return seats.reduce((acc, seat) => {
+        const row = seat.rowChar;
+        acc[row] = acc[row] || [];
+        acc[row].push({
+            id: seat.id,
+            row: row,
+            number: seat.seatNumber,
+            status: checkSeatReservation(seat.id, reservations)
+        });
+        return acc;
+    }, {});
+};
+const checkSeatReservation = (seatId, reservations) => {
+    const reservation = reservations.find(r => r.seat.id === seatId);
+    return reservation ? 'reserved' : 'available';
+};
