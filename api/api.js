@@ -4,6 +4,10 @@ const apiKey = '41e467c96314188cd667403a3df5dddd'
 const tmdbBaseUrl = 'https://api.themoviedb.org/3'
 
 const movieDetailsEndpoint =  movieId => tmdbBaseUrl + '/movie/' + movieId + '?language=en-US&api_key=' + apiKey
+const upcomingMoviesEndpoint = tmdbBaseUrl + '/movie/upcoming?language=en-US&api_key=' + apiKey
+const popularMoviesEndpoint = tmdbBaseUrl + '/movie/popular?language=en-US&api_key=' + apiKey
+
+
 
 
 const apiCall = async (endpoint , params) => {
@@ -104,3 +108,7 @@ export const getSeatReservationInfoByShowtimeId = async (showtimeId) => {
 }
 
 export const fetchMovieDetails = (movieId) => apiCall(movieDetailsEndpoint(movieId))
+
+export const fetchUpcomingMovies = () => apiCall(upcomingMoviesEndpoint)
+
+export const fetchPopularMovies = () => apiCall(popularMoviesEndpoint)

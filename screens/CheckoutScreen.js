@@ -115,7 +115,7 @@ export default function CheckoutScreen() {
             
             />
                 <View className = "flex-col  mt-8 ml-4" >
-                <Text className = "text-white text-xl font-bold ">{movie?.title}</Text>
+                <Text className = "text-white text-xl font-bold " style={{width : width * 0.5}}>{movie?.title}</Text>
                 <Text className = "text-white text-xs font-bold mt-3 ">Action, Adventure, Drama</Text>
                 <Text className = "text-white text-xs font-bold mt-1">{movie?.runtime} mins</Text>
                 <Text className = "text-white text-xs font-bold mt-1">Director :{item?.director}</Text>
