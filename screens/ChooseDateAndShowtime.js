@@ -65,8 +65,7 @@ export default function ChooseDateAndShowtime() {
         setTime(times);
     }
     const handleTimeSelection = (time) => () => {
-        console.log("**********************************************************************************************");
-        console.log(time.showtimeId);
+        
         setSelectedTime(time);
         showtimes.forEach((showtime) => {
             if (showtime.dateTime === time.dateTime  ) {
@@ -87,7 +86,7 @@ export default function ChooseDateAndShowtime() {
         <TouchableOpacity  className="rounded-xl  " onPress={() => navigation.goBack()}>
                 <ChevronLeftIcon size="28" strokeWidth={2.5} color="#96a723" />
             </TouchableOpacity>
-            <Text className = "text-white text-xl font-bold " style={generalStyles.text} >Choose Ticket </Text>
+            <Text className = "text-white text-xl font-bold " style={generalStyles.text} >Choose Date & Time </Text>
             <TouchableOpacity >
                 <View  style={{width : 28 }}/>
             </TouchableOpacity>
@@ -126,7 +125,7 @@ export default function ChooseDateAndShowtime() {
             
             )})}
             </ScrollView>
-            <ScrollView contentContainerStyle={{paddingBottom : 20 }} horizontal={true} >
+            <View  style={{flexGrow : "shrink" }} >
             {
                 selectedDay !== 0 && time.map((time) => {
                     const isSelectedTime = time === selectedTime;
@@ -140,8 +139,8 @@ export default function ChooseDateAndShowtime() {
                         className = "flex-row items-center justify-between mx-2 mt-4 py-2"
                     >
                         <View style={{
-                            width: width * 0.35,
-                            height: height * 0.05,
+                            width: width * 0.40,
+                            height: height * 0.07,
                             backgroundColor: "#393939", // Change background color when selected
                             borderRadius: 10,
                             borderWidth: isSelectedTime ? 2 : 0, // Thicker border when selected
@@ -156,7 +155,7 @@ export default function ChooseDateAndShowtime() {
 
                 )
             }
-            </ScrollView>
+            </View>
 
 
             
