@@ -26,11 +26,6 @@
 
 
 
-![aioys-8gfdq](https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/4287bb96-0b36-41d4-902f-2a88ff04457d)
-
-![geb9f-mm65v](https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/fbc30c25-465e-4569-a6e3-f109a47e1b9a)
-![Screen-Recording-2023-12-15-at-02 46 01](https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/6fd689e9-ef78-494e-90ed-22ecf2231379)
-![d42ai-wuids](https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/e9835145-55a9-46d2-a74c-237b7d9d1914)
 
 
 
