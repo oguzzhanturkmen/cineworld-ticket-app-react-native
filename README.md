@@ -10,15 +10,15 @@
 
 
 
-<img width="285"<img width="575" alt="Screenshot 2023-12-15 at 02 39 01" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/ce47329f-db5a-4c84-a526-81a2ecd5ee29">
-" alt="Screenshot 2023-12-15 at 02 38 42" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/e04548a7-6f78-4c93-b8d4-a71f67c2618e">
-<img width="285" alt="Screenshot 2023-12-15 at 02 38 24" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/9b51cabf-fc13-4e86-8b31-4d927f4ef7f6">
-<img width="285<img width="575" alt="Screenshot 2023-12-15 at 02 38 55" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/3ebfb7b3-eb43-448c-be99-f86b50429b9c">
-" alt="Screenshot 2023-12-15 at 02 39 10" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/9e2d0c51-1fb8-45fb-96bb-e875d0b6f911">
-<img width="285" alt="Screenshot 2023-12-15 at 02 39 15" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/61ec70a4-dd81-4cfc-aaff-502f40404a0f">
-<img width="575" alt="Screenshot 2023-12-15 at 02 39 22" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/6fc56872-0d52-42b0-b4ef-f2edf15108f0">
-<img width="575" alt="Screenshot 2023-12-15 at 02 39 29" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/ad7f03bf-7928-4618-9fb1-1dba3d4769f8">
-<img width="575" alt="Screenshot 2023-12-15 at 02 39 42" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/0a28b993-a459-459b-a62a-5fb98a616249">
-<img width="575" alt="Screenshot 2023-12-15 at 02 40 21" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/80458dcb-bb23-40e5-adc2-21b0254d5d84">
-<img width="575" alt="Screenshot 2023-12-15 at 02 41 06" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/68321efd-e4b6-4bb5-9968-0d61b60336aa">
-<img width="575" alt="Screenshot 2023-12-15 at 02 41 19" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/33db8e6f-7a81-4bff-8e34-c2e79715ca7a">
+<img width="285" alt="Screenshot 2023-12-15 at 02 39 01" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/67f2067c-290b-401e-91e4-c56dd75f13de">
+<img width="285" alt="Screenshot 2023-12-15 at 02 38 55" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/4e981e7c-1be0-4c41-8315-3ba65738484c">
+<img width="285" alt="Screenshot 2023-12-15 at 02 38 42" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/5e8b8962-7b6e-4223-9c60-90df383d400e">
+<img width="285" alt="Screenshot 2023-12-15 at 02 38 24" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/070e2e84-d358-444f-b680-ed7ec2f27643">
+<img width="285" alt="Screenshot 2023-12-15 at 02 39 10" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/971b97cf-b30f-40b8-8000-1f83cf3a08fb">
+<img width="285" alt="Screenshot 2023-12-15 at 02 39 15" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/9a85c238-7bd0-4e3d-b8fe-df176da2c3a9">
+<img width="285" alt="Screenshot 2023-12-15 at 02 39 22" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/ab9e4a78-e604-4bac-bcc5-9494f363b48e">
+<img width="285" alt="Screenshot 2023-12-15 at 02 39 29" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/9ca76586-8886-43d8-9934-1540d00f330b">
+<img width="285" alt="Screenshot 2023-12-15 at 02 39 42" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/e8c5bf42-2fed-4f07-9f14-c8a895c68faa">
+<img width="285" alt="Screenshot 2023-12-15 at 02 40 21" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/5afdc5f5-441a-4291-a5ee-3da2ecd96dc1">
+<img width="285" alt="Screenshot 2023-12-15 at 02 41 06" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/f931ad69-745b-4860-9e6a-e8a37ff3e28a">
+<img width="285" alt="Screenshot 2023-12-15 at 02 41 19" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/c67b510c-c95f-4d6b-9633-f9c5a6a33981">
