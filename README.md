@@ -3,5 +3,5 @@
 
 
 
-<img src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/bc1e6e47-30f9-4b20-99fe-b55b35b46ff3" width="100" height="100">
+<img src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/bc1e6e47-30f9-4b20-99fe-b55b35b46ff3" width="30" height="60">
 
