@@ -1,13 +1,23 @@
 # Cine-World Ticket Booking App (FullStack)
+# Cine-World Ticket Booking App (FullStack)
 
+## Introduction
+Welcome to the Cine-World Ticket Booking App, a full-stack application that offers a seamless movie ticket booking experience. Developed using modern technologies, this app allows users to browse movies, select theaters, choose seats, and purchase tickets with ease.
+This repo only includes the React Native part of the app, for the back end you should go to <a href"https://github.com/oguzzhanturkmen/cine-world-ticket-app-be-spring">Back End Repo</a>
 
+## Features
+- **Browse Movies:** Users can view the current movies playing in cinemas.
+- **Movie Details:** Detailed information about movies, including synopsis, ratings, and showtimes.
+- **Theater Selection:** Choose from a list of theaters showing the selected movie.
+- **Showtime Selection:** Pick convenient showtimes for your movie experience.
+- **Ticket Booking:** Book tickets for adults, children, and students.
+- **Seat Selection:** Interactive seating plan to choose your preferred seats.
+- **Secure Payment:** Enter credit card information for secure transactions.
+- **Ticket Confirmation:** Successful bookings generate a ticket for the user.
 
-
-
-
-
-
-
+## Technology Stack
+- **Frontend:** React Native, JavaScript, Nativewind, and React Native Navigation.
+- **Backend:** Java Spring, Hibernate.
 
 <img width="200" alt="Screenshot 2023-12-15 at 02 38 42" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/5e8b8962-7b6e-4223-9c60-90df383d400e">
 <img width="200" alt="Screenshot 2023-12-15 at 02 39 29" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/9ca76586-8886-43d8-9934-1540d00f330b">
