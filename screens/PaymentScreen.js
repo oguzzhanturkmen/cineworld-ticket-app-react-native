@@ -91,8 +91,8 @@ export default function PaymentScreen() {
 
       console.log("Booking Response:", bookingResponse);
 
-      // Navigate after successful booking
-      navigation.navigate('Home', { /* your navigation parameters */ });
+      
+      
 
   } catch (error) {
       console.error("Error:", error);
