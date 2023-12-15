@@ -20,8 +20,7 @@
 <img width="200" alt="Screenshot 2023-12-15 at 02 41 06" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/f931ad69-745b-4860-9e6a-e8a37ff3e28a">
 <img width="200" alt="Screenshot 2023-12-15 at 02 41 19" src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/c67b510c-c95f-4d6b-9633-f9c5a6a33981">
 
-<img src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/bc1e6e47-30f9-4b20-99fe-b55b35b46ff3" width="200" >
-<img src="https://github.com/oguzzhanturkmen/cineworld-ticket-app-react-native/assets/111460897/0498b625-f336-4dad-8706-2113495abd3a" width="200" >
+
 
 
 
